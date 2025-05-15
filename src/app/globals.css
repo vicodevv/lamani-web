@@ -58,7 +58,12 @@
   filter: blur(0);
 }
 
-/* Footer appearance on hover */
+.glassmorphism {
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(80px);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
 footer {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
@@ -92,7 +97,7 @@ button, a {
 
 /* Triangle symbols */
 .dropdown-triangle {
-  font-size: 4px;
+  font-size: 8px;
   line-height: 1;
   vertical-align: middle;
   margin-left: 5px;
@@ -107,7 +112,7 @@ button, a {
 
 /* Customize input placeholders */
 ::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.6);
   opacity: 1;
 }
 

@@ -40,12 +40,9 @@ const MenuManager = ({ children }: MenuManagerProps) => {
 
   return (
     <div className="relative">
-      {/* Main content */}
       <div 
         id="content-wrapper"
-        className={`relative z-10 transition-filter duration-300 ${
-          isMainMenuOpen ? 'blur-sm' : ''
-        }`}
+        className="relative z-10"
       >
         {children}
       </div>

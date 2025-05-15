@@ -2,6 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import gsap from 'gsap';
 
 interface MainMenuProps {
@@ -12,6 +13,7 @@ interface MainMenuProps {
 
 const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
+  const menuContentRef = useRef<HTMLDivElement>(null);
   const mainLinksRef = useRef<HTMLDivElement>(null);
   const unisexItemsRef = useRef<HTMLDivElement>(null);
   const menItemsRef = useRef<HTMLDivElement>(null);
@@ -27,9 +29,18 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
     }
   };
   
+  // Close menu function
+  const closeMenu = () => {
+    // Dispatch custom event for MenuManager
+    const event = new CustomEvent('mainMenuToggle', {
+      detail: { isOpen: false },
+    });
+    window.dispatchEvent(event);
+  };
+  
   // Animation for main menu opening/closing
   useEffect(() => {
-    if (!menuRef.current || !mainLinksRef.current || !footerRef.current) return;
+    if (!menuRef.current || !menuContentRef.current || !mainLinksRef.current || !footerRef.current) return;
     
     if (isOpen) {
       // Show menu
@@ -118,150 +129,169 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
   return (
     <div 
       ref={menuRef}
-      className="fixed inset-y-0 left-0 w-[414px] bg-black text-white z-20"
+      className="fixed inset-y-0 left-0 w-[414px] z-20"
       style={{ display: 'none' }}
     >
-      <div className="h-full px-8 py-28 flex flex-col justify-between">
-        {/* Main Navigation Links */}
-        <div ref={mainLinksRef} className="space-y-8">
-          <div>
-            <Link href="/shop" className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity">
-              SHOP
-            </Link>
-          </div>
-          
-          {/* Expandable Categories */}
-          <div>
-            <button 
-              onClick={() => toggleCategory('unisex')}
-              className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
-            >
-              <span>UNISEX</span>
-              <span className="ml-2 font-barlow-medium">
-                {activeCategory === 'unisex' ? "▲" : "▼"}
-              </span>
-            </button>
-            
-            {/* Unisex Submenu */}
-            <div 
-              ref={unisexItemsRef}
-              className="flex-col space-y-4 mt-4 ml-4"
-              style={{ display: 'none' }}
-            >
-              <Link href="/unisex/tshirts" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                Tshirts
-              </Link>
-              <Link href="/unisex/sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                Sets
-              </Link>
-              <Link href="/unisex/hoodies" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                Hoodies
-              </Link>
-            </div>
-          </div>
-          
-          <div>
-            <button 
-              onClick={() => toggleCategory('men')}
-              className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
-            >
-              <span>MEN</span>
-              <span className="ml-2 font-barlow-medium">
-                {activeCategory === 'men' ? "▲" : "▼"}
-              </span>
-            </button>
-            
-            {/* Men Submenu */}
-            <div 
-              ref={menItemsRef}
-              className="flex-col space-y-4 mt-4 ml-4"
-              style={{ display: 'none' }}
-            >
-              <Link href="/men/2-piece-sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                2-Piece Sets
-              </Link>
-              <Link href="/men/active-wear" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                Active wear
-              </Link>
-            </div>
-          </div>
-          
-          <div>
-            <button 
-              onClick={() => toggleCategory('women')}
-              className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
-            >
-              <span>WOMEN</span>
-              <span className="ml-2 font-barlow-medium">
-                {activeCategory === 'women' ? "▲" : "▼"}
-              </span>
-            </button>
-            
-            {/* Women Submenu */}
-            <div 
-              ref={womenItemsRef}
-              className="flex-col space-y-4 mt-4 ml-4"
-              style={{ display: 'none' }}
-            >
-              <Link href="/women/2-piece-sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                2-Piece Sets
-              </Link>
-              <Link href="/women/active-wear" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                Active wear
-              </Link>
-            </div>
-          </div>
-          
-          <div>
-            <Link href="/lookbook" className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity">
-              LOOKBOOK &rsquo;25
-            </Link>
-          </div>
-        </div>
+      <div 
+        ref={menuContentRef}
+        className="glassmorphism h-full w-full"
+      >
+        {/* Close button at the top left corner */}
+        <button 
+          onClick={closeMenu}
+          className="absolute cursor-pointer top-8 right-8 z-30 text-white hover:opacity-70 transition-opacity"
+          aria-label="Close menu"
+        >
+          <Image 
+            src="/images/icons/close-icon.svg" 
+            alt="Close menu" 
+            width={14} 
+            height={18}
+          />
+        </button>
         
-        {/* Footer Section */}
-        <div ref={footerRef} className="mt-auto">
-          {/* Shipping selector */}
-          <div className="mb-6">
-            <div className="font-barlow text-sm flex items-center">
-              <span>Shipping To: US / $ USD</span>
-              <span className="ml-2">▼</span>
+        <div className="h-full px-8 py-28 flex flex-col justify-between">
+          {/* Main Navigation Links */}
+          <div ref={mainLinksRef} className="space-y-8">
+            <div>
+              <Link href="/shop" className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity">
+                SHOP
+              </Link>
+            </div>
+            
+            {/* Expandable Categories */}
+            <div>
+              <button 
+                onClick={() => toggleCategory('unisex')}
+                className="font-barlow font-barlow-regular cursor-pointer text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
+              >
+                <span>UNISEX</span>
+                <span className="ml-2 font-barlow-medium">
+                  {activeCategory === 'unisex' ? "▲" : "▼"}
+                </span>
+              </button>
+              
+              {/* Unisex Submenu */}
+              <div 
+                ref={unisexItemsRef}
+                className="flex-col space-y-4 mt-4 ml-4"
+                style={{ display: 'none' }}
+              >
+                <Link href="/unisex/tshirts" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
+                  Tshirts
+                </Link>
+                <Link href="/unisex/sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
+                  Sets
+                </Link>
+                <Link href="/unisex/hoodies" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
+                  Hoodies
+                </Link>
+              </div>
+            </div>
+            
+            <div>
+              <button 
+                onClick={() => toggleCategory('men')}
+                className="font-barlow font-barlow-regular cursor-pointer text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
+              >
+                <span>MEN</span>
+                <span className="ml-2 font-barlow-medium">
+                  {activeCategory === 'men' ? "▲" : "▼"}
+                </span>
+              </button>
+              
+              {/* Men Submenu */}
+              <div 
+                ref={menItemsRef}
+                className="flex-col space-y-4 mt-4 ml-4"
+                style={{ display: 'none' }}
+              >
+                <Link href="/men/2-piece-sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
+                  2-Piece Sets
+                </Link>
+                <Link href="/men/active-wear" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
+                  Active wear
+                </Link>
+              </div>
+            </div>
+            
+            <div>
+              <button 
+                onClick={() => toggleCategory('women')}
+                className="font-barlow font-barlow-regular cursor-pointer text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
+              >
+                <span>WOMEN</span>
+                <span className="ml-2 font-barlow-medium">
+                  {activeCategory === 'women' ? "▲" : "▼"}
+                </span>
+              </button>
+              
+              {/* Women Submenu */}
+              <div 
+                ref={womenItemsRef}
+                className="flex-col space-y-4 mt-4 ml-4"
+                style={{ display: 'none' }}
+              >
+                <Link href="/women/2-piece-sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
+                  2-Piece Sets
+                </Link>
+                <Link href="/women/active-wear" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
+                  Active wear
+                </Link>
+              </div>
+            </div>
+            
+            <div>
+              <Link href="/lookbook" className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity">
+                LOOKBOOK &rsquo;25
+              </Link>
             </div>
           </div>
           
-          {/* Newsletter subscription */}
-          <div className="mb-6 flex items-center border-b border-white pb-2">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="font-barlow bg-transparent text-white placeholder-gray-400 mr-2 px-0 py-1 focus:outline-none w-full text-sm"
-            />
-            <button className="font-barlow text-white hover:opacity-70 transition-opacity whitespace-nowrap text-sm">
-              Subscribe
-            </button>
-          </div>
-          
-          {/* Social links */}
-          <div className="flex flex-wrap gap-2 text-xs font-barlow">
-            <Link href="/client-services" className="hover:opacity-70 transition-opacity">
-              Client Services
-            </Link>
-            <span>•</span>
-            <Link href="/privacy-policy" className="hover:opacity-70 transition-opacity">
-              Privacy Policy
-            </Link>
-            <span>•</span>
-            <Link href="https://tiktok.com" className="hover:opacity-70 transition-opacity">
-              TikTok
-            </Link>
-            <span>•</span>
-            <Link href="https://facebook.com" className="hover:opacity-70 transition-opacity">
-              Facebook
-            </Link>
-            <span>•</span>
-            <Link href="https://instagram.com" className="hover:opacity-70 transition-opacity">
-              Instagram
-            </Link>
+          {/* Footer Section */}
+          <div ref={footerRef} className="mt-auto">
+            {/* Shipping selector */}
+            <div className="mb-6">
+              <div className="font-barlow text-sm flex items-center">
+                <span>Shipping To: US / $ USD</span>
+                <span className="ml-2">▼</span>
+              </div>
+            </div>
+            
+            {/* Newsletter subscription */}
+            <div className="mb-6 flex items-center border-b border-white/50 pb-2">
+              <input 
+                type="email" 
+                placeholder="Enter your email" 
+                className="font-barlow bg-transparent text-white placeholder-gray-300 mr-2 px-0 py-1 focus:outline-none w-full text-sm"
+              />
+              <button className="font-barlow cursor-pointer text-white hover:opacity-70 transition-opacity whitespace-nowrap text-sm">
+                Subscribe
+              </button>
+            </div>
+            
+            {/* Social links */}
+            <div className="flex flex-wrap gap-2 text-xs font-barlow">
+              <Link href="/client-services" className="hover:opacity-70 transition-opacity">
+                Client Services
+              </Link>
+              <span>•</span>
+              <Link href="/privacy-policy" className="hover:opacity-70 transition-opacity">
+                Privacy Policy
+              </Link>
+              <span>•</span>
+              <Link href="https://tiktok.com" className="hover:opacity-70 transition-opacity">
+                TikTok
+              </Link>
+              <span>•</span>
+              <Link href="https://facebook.com" className="hover:opacity-70 transition-opacity">
+                Facebook
+              </Link>
+              <span>•</span>
+              <Link href="https://instagram.com" className="hover:opacity-70 transition-opacity">
+                Instagram
+              </Link>
+            </div>
           </div>
         </div>
       </div>
