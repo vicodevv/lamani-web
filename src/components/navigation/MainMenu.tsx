@@ -118,14 +118,14 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
   return (
     <div 
       ref={menuRef}
-      className="fixed inset-y-0 left-0 w-80 bg-black text-white z-20"
+      className="fixed inset-y-0 left-0 w-[414px] bg-black text-white z-20"
       style={{ display: 'none' }}
     >
       <div className="h-full px-8 py-28 flex flex-col justify-between">
         {/* Main Navigation Links */}
         <div ref={mainLinksRef} className="space-y-8">
           <div>
-            <Link href="/shop" className="text-base tracking-wide font-light hover:opacity-70 transition-opacity">
+            <Link href="/shop" className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity">
               SHOP
             </Link>
           </div>
@@ -134,10 +134,10 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
           <div>
             <button 
               onClick={() => toggleCategory('unisex')}
-              className="text-base tracking-wide font-light hover:opacity-70 transition-opacity flex items-center"
+              className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
             >
               <span>UNISEX</span>
-              <span className="ml-2">
+              <span className="ml-2 font-barlow-medium">
                 {activeCategory === 'unisex' ? "▲" : "▼"}
               </span>
             </button>
@@ -148,13 +148,13 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
               className="flex-col space-y-4 mt-4 ml-4"
               style={{ display: 'none' }}
             >
-              <Link href="/unisex/tshirts" className="text-sm font-light hover:opacity-70 transition-opacity">
+              <Link href="/unisex/tshirts" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
                 Tshirts
               </Link>
-              <Link href="/unisex/sets" className="text-sm font-light hover:opacity-70 transition-opacity">
+              <Link href="/unisex/sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
                 Sets
               </Link>
-              <Link href="/unisex/hoodies" className="text-sm font-light hover:opacity-70 transition-opacity">
+              <Link href="/unisex/hoodies" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
                 Hoodies
               </Link>
             </div>
@@ -163,10 +163,10 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
           <div>
             <button 
               onClick={() => toggleCategory('men')}
-              className="text-base tracking-wide font-light hover:opacity-70 transition-opacity flex items-center"
+              className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
             >
               <span>MEN</span>
-              <span className="ml-2">
+              <span className="ml-2 font-barlow-medium">
                 {activeCategory === 'men' ? "▲" : "▼"}
               </span>
             </button>
@@ -177,10 +177,10 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
               className="flex-col space-y-4 mt-4 ml-4"
               style={{ display: 'none' }}
             >
-              <Link href="/men/2-piece-sets" className="text-sm font-light hover:opacity-70 transition-opacity">
+              <Link href="/men/2-piece-sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
                 2-Piece Sets
               </Link>
-              <Link href="/men/active-wear" className="text-sm font-light hover:opacity-70 transition-opacity">
+              <Link href="/men/active-wear" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
                 Active wear
               </Link>
             </div>
@@ -189,10 +189,10 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
           <div>
             <button 
               onClick={() => toggleCategory('women')}
-              className="text-base tracking-wide font-light hover:opacity-70 transition-opacity flex items-center"
+              className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
             >
               <span>WOMEN</span>
-              <span className="ml-2">
+              <span className="ml-2 font-barlow-medium">
                 {activeCategory === 'women' ? "▲" : "▼"}
               </span>
             </button>
@@ -203,17 +203,17 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
               className="flex-col space-y-4 mt-4 ml-4"
               style={{ display: 'none' }}
             >
-              <Link href="/women/2-piece-sets" className="text-sm font-light hover:opacity-70 transition-opacity">
+              <Link href="/women/2-piece-sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
                 2-Piece Sets
               </Link>
-              <Link href="/women/active-wear" className="text-sm font-light hover:opacity-70 transition-opacity">
+              <Link href="/women/active-wear" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
                 Active wear
               </Link>
             </div>
           </div>
           
           <div>
-            <Link href="/lookbook" className="text-base tracking-wide font-light hover:opacity-70 transition-opacity">
+            <Link href="/lookbook" className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity">
               LOOKBOOK &rsquo;25
             </Link>
           </div>
@@ -223,7 +223,7 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
         <div ref={footerRef} className="mt-auto">
           {/* Shipping selector */}
           <div className="mb-6">
-            <div className="text-sm flex items-center">
+            <div className="font-barlow text-sm flex items-center">
               <span>Shipping To: US / $ USD</span>
               <span className="ml-2">▼</span>
             </div>
@@ -234,15 +234,15 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
             <input 
               type="email" 
               placeholder="Enter your email" 
-              className="bg-transparent text-white placeholder-gray-400 mr-2 px-0 py-1 focus:outline-none w-full text-sm"
+              className="font-barlow bg-transparent text-white placeholder-gray-400 mr-2 px-0 py-1 focus:outline-none w-full text-sm"
             />
-            <button className="text-white hover:opacity-70 transition-opacity whitespace-nowrap text-sm">
+            <button className="font-barlow text-white hover:opacity-70 transition-opacity whitespace-nowrap text-sm">
               Subscribe
             </button>
           </div>
           
           {/* Social links */}
-          <div className="flex flex-wrap gap-2 text-xs">
+          <div className="flex flex-wrap gap-2 text-xs font-barlow">
             <Link href="/client-services" className="hover:opacity-70 transition-opacity">
               Client Services
             </Link>

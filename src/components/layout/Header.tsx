@@ -58,7 +58,7 @@ const Header = ({ transparent = false }: HeaderProps) => {
 
   return (
     <header className={`header fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${transparent ? 'bg-transparent' : 'bg-black'}`}>
-      <div className="container mx-auto px-4 flex justify-between items-center h-16">
+      <div className="mx-auto px-4 flex justify-between items-center h-16">
         {/* Left - Hamburger or Close */}
         <div className="flex-1">
           <button 

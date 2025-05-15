@@ -5,11 +5,43 @@
   --background-rgb: 0, 0, 0;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
-  overflow-x: hidden;
-  font-family: var(--font-geist-sans), sans-serif;
+/* Font configuration */
+@layer base {
+  body {
+    color: rgb(var(--foreground-rgb));
+    background: rgb(var(--background-rgb));
+    overflow-x: hidden;
+    font-family: var(--font-barlow-semi-condensed), sans-serif;
+  }
+
+  .font-barlow {
+    font-family: var(--font-barlow-semi-condensed), sans-serif;
+  }
+  
+  .font-barlow-black {
+    font-weight: 900;
+  }
+  
+  .font-barlow-bold {
+    font-weight: 700;
+  }
+  
+  .font-barlow-semibold {
+    font-weight: 600;
+  }
+  
+  .font-barlow-medium {
+    font-weight: 500;
+  }
+  
+  .font-barlow-regular {
+    font-weight: 400;
+  }
+  
+  /* Italic utility classes */
+  .font-barlow-italic {
+    font-style: italic;
+  }
 }
 
 /* Filter transitions for blur effect */
@@ -60,7 +92,7 @@ button, a {
 
 /* Triangle symbols */
 .dropdown-triangle {
-  font-size: 8px;
+  font-size: 4px;
   line-height: 1;
   vertical-align: middle;
   margin-left: 5px;
