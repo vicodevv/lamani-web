@@ -1,9 +1,10 @@
 "use client"
 
-import { useRef, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { CATEGORIES, SUBCATEGORIES, SUBCATEGORY_ROUTES } from '@/lib/constants';
+import Image from 'next/image';
 
 interface MainMenuProps {
   isOpen: boolean;
@@ -103,13 +104,13 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
       let activeRef = null;
       
       switch (activeCategory) {
-        case 'unisex':
+        case CATEGORIES.UNISEX:
           activeRef = unisexItemsRef.current;
           break;
-        case 'men':
+        case CATEGORIES.MEN:
           activeRef = menItemsRef.current;
           break;
-        case 'women':
+        case CATEGORIES.WOMEN:
           activeRef = womenItemsRef.current;
           break;
       }
@@ -139,7 +140,7 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
         {/* Close button at the top left corner */}
         <button 
           onClick={closeMenu}
-          className="absolute cursor-pointer top-8 right-8 z-30 text-white hover:opacity-70 transition-opacity"
+          className="absolute top-8 left-8 z-30 text-white hover:opacity-70 transition-opacity"
           aria-label="Close menu"
         >
           <Image 
@@ -154,7 +155,11 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
           {/* Main Navigation Links */}
           <div ref={mainLinksRef} className="space-y-8">
             <div>
-              <Link href="/shop" className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity">
+              <Link 
+                href="/shop" 
+                className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity"
+                onClick={closeMenu}
+              >
                 SHOP
               </Link>
             </div>
@@ -162,12 +167,12 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
             {/* Expandable Categories */}
             <div>
               <button 
-                onClick={() => toggleCategory('unisex')}
+                onClick={() => toggleCategory(CATEGORIES.UNISEX)}
                 className="font-barlow font-barlow-regular cursor-pointer text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
               >
-                <span>UNISEX</span>
+                <span>{CATEGORIES.UNISEX}</span>
                 <span className="ml-2 font-barlow-medium">
-                  {activeCategory === 'unisex' ? "▲" : "▼"}
+                  {activeCategory === CATEGORIES.UNISEX ? "▲" : "▼"}
                 </span>
               </button>
               
@@ -177,26 +182,38 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
                 className="flex-col space-y-4 mt-4 ml-4"
                 style={{ display: 'none' }}
               >
-                <Link href="/unisex/tshirts" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                  Tshirts
+                <Link 
+                  href={SUBCATEGORY_ROUTES.UNISEX.TSHIRTS}
+                  className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity"
+                  onClick={closeMenu}
+                >
+                  {SUBCATEGORIES.UNISEX.TSHIRTS}
                 </Link>
-                <Link href="/unisex/sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                  Sets
+                <Link 
+                  href={SUBCATEGORY_ROUTES.UNISEX.SETS}
+                  className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity"
+                  onClick={closeMenu}
+                >
+                  {SUBCATEGORIES.UNISEX.SETS}
                 </Link>
-                <Link href="/unisex/hoodies" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                  Hoodies
+                <Link 
+                  href={SUBCATEGORY_ROUTES.UNISEX.HOODIES}
+                  className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity"
+                  onClick={closeMenu}
+                >
+                  {SUBCATEGORIES.UNISEX.HOODIES}
                 </Link>
               </div>
             </div>
             
             <div>
               <button 
-                onClick={() => toggleCategory('men')}
+                onClick={() => toggleCategory(CATEGORIES.MEN)}
                 className="font-barlow font-barlow-regular cursor-pointer text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
               >
-                <span>MEN</span>
+                <span>{CATEGORIES.MEN}</span>
                 <span className="ml-2 font-barlow-medium">
-                  {activeCategory === 'men' ? "▲" : "▼"}
+                  {activeCategory === CATEGORIES.MEN ? "▲" : "▼"}
                 </span>
               </button>
               
@@ -206,23 +223,31 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
                 className="flex-col space-y-4 mt-4 ml-4"
                 style={{ display: 'none' }}
               >
-                <Link href="/men/2-piece-sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                  2-Piece Sets
+                <Link 
+                  href={SUBCATEGORY_ROUTES.MEN.ACTIVEWEAR}
+                  className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity"
+                  onClick={closeMenu}
+                >
+                  {SUBCATEGORIES.MEN.ACTIVEWEAR}
                 </Link>
-                <Link href="/men/active-wear" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                  Active wear
+                <Link 
+                  href={SUBCATEGORY_ROUTES.MEN.SETS}
+                  className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity"
+                  onClick={closeMenu}
+                >
+                  {SUBCATEGORIES.MEN.SETS}
                 </Link>
               </div>
             </div>
             
             <div>
               <button 
-                onClick={() => toggleCategory('women')}
+                onClick={() => toggleCategory(CATEGORIES.WOMEN)}
                 className="font-barlow font-barlow-regular cursor-pointer text-base tracking-wide hover:opacity-70 transition-opacity flex items-center"
               >
-                <span>WOMEN</span>
+                <span>{CATEGORIES.WOMEN}</span>
                 <span className="ml-2 font-barlow-medium">
-                  {activeCategory === 'women' ? "▲" : "▼"}
+                  {activeCategory === CATEGORIES.WOMEN ? "▲" : "▼"}
                 </span>
               </button>
               
@@ -232,17 +257,29 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
                 className="flex-col space-y-4 mt-4 ml-4"
                 style={{ display: 'none' }}
               >
-                <Link href="/women/2-piece-sets" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                  2-Piece Sets
+                <Link 
+                  href={SUBCATEGORY_ROUTES.WOMEN.ACTIVEWEAR}
+                  className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity"
+                  onClick={closeMenu}
+                >
+                  {SUBCATEGORIES.WOMEN.ACTIVEWEAR}
                 </Link>
-                <Link href="/women/active-wear" className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity">
-                  Active wear
+                <Link 
+                  href={SUBCATEGORY_ROUTES.WOMEN.SETS}
+                  className="font-barlow text-sm font-barlow-regular hover:opacity-70 transition-opacity"
+                  onClick={closeMenu}
+                >
+                  {SUBCATEGORIES.WOMEN.SETS}
                 </Link>
               </div>
             </div>
             
             <div>
-              <Link href="/lookbook" className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity">
+              <Link 
+                href="/lookbook" 
+                className="font-barlow font-barlow-regular text-base tracking-wide hover:opacity-70 transition-opacity"
+                onClick={closeMenu}
+              >
                 LOOKBOOK &rsquo;25
               </Link>
             </div>

@@ -80,7 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${barlowSemiCondensed.variable} antialiased bg-black text-white font-barlow`}
+        className={`${geistSans.variable} ${geistMono.variable} ${barlowSemiCondensed.variable} antialiased bg-white text-white font-barlow`}
       >
         <MenuManager>
           {children}

@@ -14,6 +14,7 @@
     font-family: var(--font-barlow-semi-condensed), sans-serif;
   }
 
+  /* Font weight utility classes for Barlow Semi Condensed */
   .font-barlow {
     font-family: var(--font-barlow-semi-condensed), sans-serif;
   }
@@ -42,28 +43,37 @@
   .font-barlow-italic {
     font-style: italic;
   }
+  
+  /* Force standard input styles */
+  input {
+    @apply bg-transparent border-none outline-none;
+  }
+  
+  input:focus {
+    @apply outline-none ring-0 border-none;
+  }
 }
 
-/* Filter transitions for blur effect */
-.transition-filter {
-  transition: filter 0.3s ease-out;
-}
-
-/* Blur utilities */
-.blur-sm {
-  filter: blur(3px);
-}
-
-.blur-none {
-  filter: blur(0);
-}
-
+/* Glassmorphism effects */
 .glassmorphism {
   backdrop-filter: blur(80px);
   -webkit-backdrop-filter: blur(80px);
   background-color: rgba(0, 0, 0, 0.4);
 }
 
+.glassmorphism-menu {
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(80px);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.glassmorphism-search {
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Footer appearance on hover */
 footer {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
