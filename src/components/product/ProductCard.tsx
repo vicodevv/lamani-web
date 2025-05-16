@@ -22,14 +22,14 @@ const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <div className="flex flex-col">
-      <Link href={`/product/${id}`} className="relative w-full overflow-hidden mb-4">
-        <div className="aspect-[3/4]">
+      <Link href={`/product/${id}`} className="block group product-card">
+        <div className="relative w-full aspect-[5/9] overflow-hidden">
           <Image
             src={imageUrl}
             alt={name}
             fill
-            className="object-cover hover:scale-105 transition-transform duration-700 ease-out"
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+            sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+            className="object-contain object-center"
           />
         </div>
       </Link>
