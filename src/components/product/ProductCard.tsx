@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { ROUTES } from '@/lib/constants';
 
 interface ProductCardProps {
   id: string;
@@ -22,7 +23,8 @@ const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <div className="flex flex-col">
-      <Link href={`/product/${id}`} className="block group product-card">
+      {/* Product image */}
+      <Link href={ROUTES.PRODUCT(id)} className="block group product-card">
         <div className="relative w-full aspect-[5/9] overflow-hidden">
           <Image
             src={imageUrl}
@@ -34,8 +36,9 @@ const ProductCard = ({
         </div>
       </Link>
 
+      {/* Product info */}
       <div className="flex flex-col items-center text-center">
-        <h3 className="text-sm font-barlow text-black">
+        <h3 className="text-sm font-barlow text-black font-normal">
           {collection}
         </h3>
         <p className="text-sm font-barlow text-black">
