@@ -48,7 +48,7 @@ const HeroSection = () => {
       >
         <div className="relative w-full h-full">
           <Image
-            src="/images/hero/hero-image.svg"
+            src="/images/hero/hero-image-2.jpg"
             alt="LAMANI Collection"
             fill
             className="object-cover"

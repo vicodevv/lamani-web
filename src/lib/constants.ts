@@ -42,7 +42,7 @@ export const CATEGORIES = {
       SETS: '/men/2-piece-sets'
     },
     UNISEX: {
-      TSHIRTS: '/unisex/tshirts',
+      TSHIRTS: '/unisex/t-shirts',
       SETS: '/unisex/sets',
       HOODIES: '/unisex/hoodies'
     }

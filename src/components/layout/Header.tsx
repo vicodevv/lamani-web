@@ -80,7 +80,7 @@ const Header = ({ transparent = false }: HeaderProps) => {
           <div className="flex-1">
             <button 
               onClick={toggleMenu}
-              className={`${textColor} hover:opacity-70 transition-opacity`}
+              className={`${textColor} cursor-pointer hover:opacity-70 transition-opacity`}
               aria-label="Open menu"
             >
               <Image 

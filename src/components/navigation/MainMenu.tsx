@@ -135,12 +135,12 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
     >
       <div 
         ref={menuContentRef}
-        className="glassmorphism h-full w-full"
+        className="glassmorphism h-full w-full flex flex-col"
       >
         {/* Close button at the top left corner */}
         <button 
           onClick={closeMenu}
-          className="absolute top-8 left-8 z-30 text-white hover:opacity-70 transition-opacity"
+          className="cursor-pointer absolute top-5 left-4 z-30 text-white hover:opacity-70 transition-opacity"
           aria-label="Close menu"
         >
           <Image 
@@ -151,9 +151,10 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
           />
         </button>
         
-        <div className="h-full px-8 py-28 flex flex-col justify-between">
+        {/* Main content container */}
+        <div className="h-full px-4 py-12 flex flex-col">
           {/* Main Navigation Links */}
-          <div ref={mainLinksRef} className="space-y-8">
+          <div ref={mainLinksRef} className="space-y-8 pt-16">
             <div>
               <Link 
                 href="/shop" 
@@ -285,8 +286,8 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
             </div>
           </div>
           
-          {/* Footer Section */}
-          <div ref={footerRef} className="mt-auto">
+          {/* Footer Section - now uses mt-auto to push to bottom */}
+          <div ref={footerRef} className="mt-auto mb-4">
             {/* Shipping selector */}
             <div className="mb-6">
               <div className="font-barlow text-sm flex items-center">
