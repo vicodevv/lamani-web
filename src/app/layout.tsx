@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import { Geist, Geist_Mono } from "next/font/google";
 import './globals.css';
 import MenuManager from '@/components/navigation/MenuManager';
+// import PageTransition from '@/components/navigation/PageTransition';
 
 // Geist font from Google
 const geistSans = Geist({
@@ -83,7 +84,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${barlowSemiCondensed.variable} antialiased bg-white text-white font-barlow`}
       >
         <MenuManager>
+        {/* <PageTransition> */}
           {children}
+          {/* </PageTransition> */}
         </MenuManager>
       </body>
     </html>
