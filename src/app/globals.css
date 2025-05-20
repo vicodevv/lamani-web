@@ -17,6 +17,7 @@
   /* Font weight utility classes for Barlow Semi Condensed */
   .font-barlow {
     font-family: var(--font-barlow-semi-condensed), sans-serif;
+    font-weight: 500;
   }
   
   .font-barlow-black {

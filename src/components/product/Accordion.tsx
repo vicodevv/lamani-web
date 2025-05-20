@@ -10,25 +10,35 @@ interface AccordionProps {
 export default function Accordion({ title, children }: AccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const toggleAccordion = () => {
+    console.log(`Accordion "${title}" clicked, current state:`, isOpen);
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className="border-t border-gray-200">
+    <div className="border-b border-gray-200">
       <button
-        className="w-full py-4 flex justify-between items-center font-barlow text-left"
-        onClick={() => setIsOpen(!isOpen)}
+        type="button"
+        className="cursor-pointer w-full py-4 px-0 flex justify-between items-center font-barlow text-left transition-colors focus:outline-none"
+        onClick={toggleAccordion}
+        aria-expanded={isOpen}
+        aria-controls={`accordion-content-${title.replace(/\s+/g, '-').toLowerCase()}`}
       >
-        <span>{title}</span>
-        <span>{isOpen ? '▲' : '▼'}</span>
+        <span className="font-medium">{title}</span>
+        <span className="text-sm transition-transform duration-200" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>
+          ▼
+        </span>
       </button>
       
       <div 
-        className="overflow-hidden transition-all duration-300"
-        style={{ 
-          maxHeight: isOpen ? '500px' : '0',
-          opacity: isOpen ? 1 : 0,
-          visibility: isOpen ? 'visible' : 'hidden'
-        }}
+        id={`accordion-content-${title.replace(/\s+/g, '-').toLowerCase()}`}
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}
       >
-        {children}
+        <div className="pb-4">
+          {children}
+        </div>
       </div>
     </div>
   );

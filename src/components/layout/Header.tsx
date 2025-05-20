@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import gsap from 'gsap';
 import SearchOverlay from '@/components/SearchOverlay';
+import { useCart } from '@/context/CartContext';
 
 interface HeaderProps {
   transparent?: boolean;
@@ -13,6 +14,7 @@ interface HeaderProps {
 const Header = ({ transparent = false }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { itemCount } = useCart();
 
   // Toggle main menu function
   const toggleMenu = () => {
@@ -130,7 +132,7 @@ const Header = ({ transparent = false }: HeaderProps) => {
                 className={iconFilter}
               />
             </Link>
-            <Link href="/cart" className={`${textColor} hover:opacity-70 transition-opacity`}>
+            <Link href="/cart" className={`${textColor} hover:opacity-70 transition-opacity relative`}>
               <Image 
                 src="/images/icons/cart-icon.svg" 
                 alt="Cart" 
@@ -138,6 +140,11 @@ const Header = ({ transparent = false }: HeaderProps) => {
                 height={18}
                 className={iconFilter}
               />
+              {itemCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {itemCount}
+                </span>
+              )}
             </Link>
           </div>
         </div>

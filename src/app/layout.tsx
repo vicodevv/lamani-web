@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import { Geist, Geist_Mono } from "next/font/google";
 import './globals.css';
 import MenuManager from '@/components/navigation/MenuManager';
+import { CartProvider } from '@/context/CartContext';
 // import PageTransition from '@/components/navigation/PageTransition';
 
 // Geist font from Google
@@ -83,11 +84,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${barlowSemiCondensed.variable} antialiased bg-white text-white font-barlow`}
       >
+      <CartProvider>
         <MenuManager>
         {/* <PageTransition> */}
           {children}
           {/* </PageTransition> */}
         </MenuManager>
+      </CartProvider>
       </body>
     </html>
   );

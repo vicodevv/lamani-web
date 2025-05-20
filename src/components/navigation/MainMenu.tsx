@@ -318,15 +318,15 @@ const MainMenu = ({ isOpen, activeCategory, setActiveCategory }: MainMenuProps) 
                 Privacy Policy
               </Link>
               <span>•</span>
-              <Link href="https://tiktok.com" className="hover:opacity-70 transition-opacity">
+              <Link href="https://www.tiktok.com/@lamanidesign" className="hover:opacity-70 transition-opacity">
                 TikTok
               </Link>
               <span>•</span>
-              <Link href="https://facebook.com" className="hover:opacity-70 transition-opacity">
-                Facebook
+              <Link href="https://www.youtube.com/@LAMANIPROJECT" className="hover:opacity-70 transition-opacity">
+                YouTube
               </Link>
               <span>•</span>
-              <Link href="https://instagram.com" className="hover:opacity-70 transition-opacity">
+              <Link href="https://www.instagram.com/lamani_official" className="hover:opacity-70 transition-opacity">
                 Instagram
               </Link>
             </div>
