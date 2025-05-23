@@ -1,21 +1,21 @@
 export interface Product {
-    id: string;
-    name: string;
-    price: number;
-    currency: string;
-    imageUrl: string;
-    collection?: string;
-    description?: string;
-    details?: string[];
-    sizes?: string[];
-    colors?: string[];
-    category: string;
-    subcategory: string;
-    inStock: boolean;
-    featured?: boolean;
-    newArrival?: boolean;
-    images?: string[];
-  }
+  id: string;
+  name: string;
+  price: number;
+  currency: string;
+  imageUrl: string;
+  images?: string[];
+  collection?: string;
+  description?: string;
+  details?: string[];
+  sizes?: string[];
+  colors?: string[];
+  category: string;
+  subcategory: string;
+  inStock: boolean;
+  featured?: boolean;
+  newArrival?: boolean;
+}
   
   export interface Category {
     id: string;

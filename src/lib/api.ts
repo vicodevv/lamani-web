@@ -7,7 +7,16 @@ const mockProducts: Product[] = [
     name: 'Navy Polo Shirt',
     price: 215,
     currency: '£',
-    imageUrl: '/images/products/model-1.svg',
+    imageUrl: '/images/products/lamani0005.png', // Primary image for grid
+    images: [
+      '/images/products/lamani0005.png', // Same as primary
+      '/images/products/lamani0006.png', // Side view
+      '/images/products/lamani0008.png', // Back view
+      '/images/products/lamani0010.png', // Detail shot
+      '/images/products/lamani0017.png',  // Lifestyle image
+      '/images/products/lamani0027.png'  // Lifestyle image
+
+    ],
     collection: 'Lamani summer edition',
     description: 'Premium navy polo shirt from our summer collection.',
     details: ['100% Cotton', 'Relaxed fit', 'Half-zip collar'],
