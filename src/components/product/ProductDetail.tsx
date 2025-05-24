@@ -23,11 +23,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   );
   const [quantity, setQuantity] = useState(1);
   
-  // Use images array if available, otherwise fallback to single imageUrl
-  const images = product.images && product.images.length > 0 
-    ? product.images 
-    : [product.imageUrl];
-  
+  const images = product.images || [product.imageUrl];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   const { addToCart } = useCart();
@@ -105,48 +101,45 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </div>
         </div>
         
-        {/* Product Image Section with Better Sizing */}
         <div className="order-1 lg:order-2 flex-1 flex justify-center items-start">
-          <div className="w-full max-w-[600px] relative">
-            <div className="relative aspect-[3/4] w-full group bg-gray-50">
+          <div className="w-full max-w-[500px] relative">
+            <div className="relative aspect-[3/4] w-full group">
               <Image
                 src={images[currentImageIndex]}
                 alt={product.name}
                 fill
                 priority
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                className="object-cover object-center"
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-contain object-center"
               />
               
-              {/* Navigation arrows - only show if more than one image */}
+              {/* Navigation arrows */}
               {images.length > 1 && (
                 <>
                   <button
                     onClick={goToPrevImage}
-                    className="absolute left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-200 z-10"
+                    className="absolute left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 lg:p-2 rounded-full shadow-md lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-200"
                   >
-                    <ChevronLeft className="h-5 w-5 text-black" />
+                    <ChevronLeft className="h-5 w-5 lg:h-5 lg:w-5 text-black" />
                   </button>
                   
                   <button
                     onClick={goToNextImage}
-                    className="absolute right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-200 z-10"
+                    className="absolute right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 lg:p-2 rounded-full shadow-md lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-200"
                   >
-                    <ChevronRight className="h-5 w-5 text-black" />
+                    <ChevronRight className="h-5 w-5 lg:h-5 lg:w-5 text-black" />
                   </button>
                 </>
               )}
               
-              {/* Image indicators - only show if more than one image */}
+              {/* Image indicators */}
               {images.length > 1 && (
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                   {images.map((_, index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentImageIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-colors ${
+                      className={`w-2 h-2 lg:w-2 lg:h-2 rounded-full transition-colors ${
                         index === currentImageIndex ? 'bg-black' : 'bg-white/70 lg:bg-gray-300'
                       }`}
                     />
@@ -155,15 +148,15 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               )}
             </div>
             
-            {/* Thumbnail navigation - only show if more than one image */}
+            {/* Thumbnail navigation */}
             {images.length > 1 && (
               <div className="flex space-x-2 mt-4 overflow-x-auto pb-2">
                 {images.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentImageIndex(index)}
-                    className={`relative w-16 h-20 lg:w-20 lg:h-24 flex-shrink-0 border cursor-pointer bg-gray-50 ${
-                      index === currentImageIndex ? 'border-black border-2' : 'border-gray-200'
+                    className={`relative w-16 h-20 lg:w-20 lg:h-24 flex-shrink-0 border cursor-pointer ${
+                      index === currentImageIndex ? 'border-black lg:border-black border-2 lg:border' : 'border-gray-200'
                     }`}
                   >
                     <Image
@@ -180,14 +173,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </div>
         
         <div className="order-2 lg:order-3 w-full lg:w-[350px] lg:flex-shrink-0 flex flex-col space-y-6 pt-6 lg:pt-8">
+          {/* Product name and price */}
           <div>
             <h1 className="text-xl sm:text-2xl lg:text-xl font-barlow">{product.collection}</h1>
             <p className="text-xl sm:text-2xl lg:text-xl font-barlow mt-1">{product.currency}{product.price}</p>
           </div>
           
+          {/* Size selector */}
           {product.sizes && product.sizes.length > 0 && (
             <div>
-              <div className="flex justify-between items-center mb-2">
+              <div className="flex justify-between items-center mb-2 lg:mb-2">
                 <h2 className="text-sm font-barlow">Size</h2>
                 <a href="#" className="text-sm text-gray-500 hover:underline">Size Guide</a>
               </div>
@@ -201,9 +196,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </div>
           )}
           
+          {/* Color selector */}
           {product.colors && product.colors.length > 0 && (
             <div>
-              <h2 className="text-sm font-barlow mb-2">
+              <h2 className="text-sm font-barlow mb-2 lg:mb-2">
                 Color {selectedColor && `(${selectedColor})`}
               </h2>
               
@@ -215,10 +211,11 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </div>
           )}
           
+          {/* Add to bag button */}
           <div className="pt-4 lg:mt-auto lg:pt-8">
             <button
               onClick={handleAddToBag}
-              className="w-full py-4 bg-black text-white font-barlow uppercase tracking-wider hover:bg-gray-900 transition-colors cursor-pointer"
+              className="w-full py-4 bg-black text-white font-barlow uppercase tracking-wider hover:bg-gray-900 transition-colors cursor-pointer text-sm sm:text-base lg:text-sm"
             >
               ADD TO BAG
             </button>
@@ -226,6 +223,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </div>
       </div>
       
+      {/* Toast notification */}
       <Toast 
         message={toast.message}
         type={toast.type}
